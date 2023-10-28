@@ -48,10 +48,15 @@ pipeline {
         }
         stage('Push Image to dockerHub') {
             steps {
-                script{
-                    // sh 'docker login -u "sathvik04" -p "$sibpwd123"'
-                    sh 'echo $DOCKERHUB_CRED'
-                    sh 'docker login -u "sathvik04" -p $DOCKERHUB_CRED'
+                // script{
+                //     // sh 'docker login -u "sathvik04" -p "$sibpwd123"'
+                //     sh 'echo $DOCKERHUB_CRED'
+                //     sh 'docker login -u "sathvik04" -p $DOCKERHUB_CRED'
+                //     sh 'docker push ' +registry +':latest'
+                // }
+
+                withCredentials([string(credentialsId: 'dockerhub_pwd', variable: 'dockerhub_pwd')]) {
+                    sh 'docker login -u "sathvik04" -p ${dockerhub_pwd}'
                     sh 'docker push ' +registry +':latest'
                 }
                 // withDockerRegistry([credentialsId: 'CRED_DOCKER', url: '']){
