@@ -15,6 +15,8 @@ pipeline {
             DOCKERHUB_CRED = credentials('dockerhub_id')
             registryCredential = 'dockerhub_id'
             dockerimage = ''
+            dockerHome = tool 'myDocker'
+            env.PATH = "${dockerHome}/bin:${env.PATH}"
       }
     stages {
         stage('Git Pull') {
