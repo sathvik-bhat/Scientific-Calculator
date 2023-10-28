@@ -9,13 +9,13 @@ pipeline {
     }
     
     // tools {nodejs "nodejs"}
-    //  environment {
-    //         CI = 'true'
-    //         registry = 'gaparul/scientific-calculator-react'
-    //         DOCKERHUB_CRED = credentials('CRED_DOCKER')
-    //         registryCredential = 'CRED_DOCKER'
-    //         dockerimage = ''
-    //   }
+     environment {
+            CI = 'true'
+            registry = 'sathvik/scientific-calculator-react'
+            DOCKERHUB_CRED = credentials('dockerhub_id')
+            registryCredential = 'dockerhub_id'
+            dockerimage = ''
+      }
     stages {
         stage('Git Pull') {
             steps {
@@ -35,6 +35,16 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        //
+        stage('Build Docker Image') {
+            steps {
+                script{
+                    // docker = sh '/usr/local/bin/docker'
+                    // dockerimage = docker.build registry + ":latest"
+                    dockerimage = sh '/usr/local/bin/docker build -t'+registry+':latest .'
+                }
+                
+                
+            }
+        }
     }
 }
