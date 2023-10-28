@@ -11,7 +11,7 @@ pipeline {
     // tools {nodejs "nodejs"}
      environment {
             CI = 'true'
-            registry = 'sathvik/scientific-calculator-react'
+            registry = 'sathvik04/scientific-calculator'
             DOCKERHUB_CRED = credentials('dockerhub_id')
             registryCredential = 'dockerhub_id'
             dockerimage = ''
@@ -40,7 +40,7 @@ pipeline {
                 script{
                     // docker = sh '/usr/local/bin/docker'
                     // dockerimage = docker.build registry + ":latest"
-                    dockerimage = sh '/usr/local/bin/docker build -t'+registry+':latest .'
+                    dockerimage = sh '/usr/local/bin/docker build -t '+registry+':latest .'
                 }
                 
                 
