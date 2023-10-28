@@ -49,8 +49,8 @@ pipeline {
                 script{
                     // docker = sh '/usr/local/bin/docker'
                     // dockerimage = docker.build registry + ":latest"
-                    // dockerimage = sh '/usr/local/bin/docker build -t '+registry+':latest .'
-                    dockerimage = sh '/var/lib/docker build -t '+registry+':latest .'
+                    dockerimage = sh '/usr/bin/docker build -t '+registry+':latest .'
+                    // dockerimage = sh '/var/lib/docker build -t '+registry+':latest .'
                 }
             }
         }
