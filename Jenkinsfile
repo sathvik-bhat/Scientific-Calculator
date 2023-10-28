@@ -50,6 +50,7 @@ pipeline {
             steps {
                 script{
                     // sh 'docker login -u "sathvik04" -p "$sibpwd123"'
+                    sh 'echo $DOCKERHUB_CRED'
                     sh 'docker login -u "sathvik04" -p $DOCKERHUB_CRED'
                     sh 'docker push ' +registry +':latest'
                 }
