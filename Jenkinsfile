@@ -46,5 +46,19 @@ pipeline {
                 }
             }
         }
+        stage('Push Image to dockerHub') {
+            steps {
+                script{
+                    sh 'docker login -u "sathvik04" -p "$sibpwd123"'
+                    sh 'docker push ' +registry +':latest'
+                }
+                // withDockerRegistry([credentialsId: 'CRED_DOCKER', url: '']){
+                //     sh '/usr/local/bin/docker push gaparul/calculator-react:latest'
+                // }
+                // sh 'echo $DOCKERHUB_CRED_PSW | /usr/local/bin/docker login -u $DOCKERHUB_CRED_USR --password-stdin'
+                
+                
+            }
+        }
     }
 }
