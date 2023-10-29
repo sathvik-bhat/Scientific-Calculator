@@ -77,6 +77,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
+                sh 'chmod 600 scientific-calculator.pem'
                 // sh '/home/sathvik/.local/bin/ansible-playbook playbook.yml -i inventory -e image_name=sathvik04/scientific-calculator'
                 ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory',
                 playbook: 'playbook.yml', sudoUser: null, extras: '-e "image_name=sathvik04/scientific-calculator"'
