@@ -75,7 +75,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'ansible-playbook playbook.yml -i inventory -e image_name=sathvik04/scientific-calculator'
+                sh '/home/sathvik/.local/bin/ansible-playbook playbook.yml -i inventory -e image_name=sathvik04/scientific-calculator'
                 // ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory',
                 //  playbook: 'playbook.yml', sudoUser: null, extras: '-e "image_name=gaparul/scientific-calculator-react"'
             }
