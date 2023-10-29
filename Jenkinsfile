@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Git Pull') {
             steps {
-                git url: 'https://github.com/gaparul/Scientific-Calculator.git', branch: 'master',
+                git url: 'https://github.com/sathvik-bhat/Scientific-Calculator.git', branch: 'master',
                 credentialsId: 'Credential_Git'
             }
         }
