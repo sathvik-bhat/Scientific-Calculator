@@ -31,49 +31,49 @@ pipeline {
             }
         }
 
-        // stage('Test') {
-        //     steps {
-        //         sh 'chmod +x ./jenkins/scripts/test.sh'
-        //         sh './jenkins/scripts/test.sh'
-        //     }
-        // }
-        // stage('Build Docker Image') {
+        stage('Test') {
+            steps {
+                sh 'chmod +x ./jenkins/scripts/test.sh'
+                sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Build Docker Image') {
 
-        //     steps {
-        //         script{
-        //             // docker = sh '/usr/local/bin/docker'
-        //             // dockerimage = docker.build registry + ":latest"
-        //             dockerimage = sh 'docker build -t '+registry+':latest .'
-        //             // dockerimage = sh '/var/lib/docker build -t '+registry+':latest .'
-        //         }
-        //     }
-        // }
-        // stage('Push Image to dockerHub') {
-        //     steps {
-        //         // script{
-        //         //     // sh 'docker login -u "sathvik04" -p "$sibpwd123"'
-        //         //     sh 'echo $DOCKERHUB_CRED'
-        //         //     sh 'docker login -u "sathvik04" -p $DOCKERHUB_CRED'
-        //         //     sh 'docker push ' +registry +':latest'
-        //         // }
+            steps {
+                script{
+                    // docker = sh '/usr/local/bin/docker'
+                    // dockerimage = docker.build registry + ":latest"
+                    dockerimage = sh 'docker build -t '+registry+':latest .'
+                    // dockerimage = sh '/var/lib/docker build -t '+registry+':latest .'
+                }
+            }
+        }
+        stage('Push Image to dockerHub') {
+            steps {
+                // script{
+                //     // sh 'docker login -u "sathvik04" -p "$sibpwd123"'
+                //     sh 'echo $DOCKERHUB_CRED'
+                //     sh 'docker login -u "sathvik04" -p $DOCKERHUB_CRED'
+                //     sh 'docker push ' +registry +':latest'
+                // }
 
-        //         withCredentials([string(credentialsId: 'dockerhub_pwd', variable: 'dockerhub_pwd')]) {
-        //             sh 'docker login -u "sathvik04" -p ${dockerhub_pwd}'
-        //             sh 'docker push ' +registry +':latest'
-        //         }
-        //         // withDockerRegistry([credentialsId: 'CRED_DOCKER', url: '']){
-        //         //     sh '/usr/local/bin/docker push gaparul/calculator-react:latest'
-        //         // }
-        //         // sh 'echo $DOCKERHUB_CRED_PSW | /usr/local/bin/docker login -u $DOCKERHUB_CRED_USR --password-stdin'
+                withCredentials([string(credentialsId: 'dockerhub_pwd', variable: 'dockerhub_pwd')]) {
+                    sh 'docker login -u "sathvik04" -p ${dockerhub_pwd}'
+                    sh 'docker push ' +registry +':latest'
+                }
+                // withDockerRegistry([credentialsId: 'CRED_DOCKER', url: '']){
+                //     sh '/usr/local/bin/docker push gaparul/calculator-react:latest'
+                // }
+                // sh 'echo $DOCKERHUB_CRED_PSW | /usr/local/bin/docker login -u $DOCKERHUB_CRED_USR --password-stdin'
                 
                 
-        //     }
-        // }
-        // stage('Free local space') {
-        //     steps {
-        //         sh 'docker rmi $registry:latest'
-        //     }
-        // }
+            }
+        }
+        stage('Free local space') {
+            steps {
+                sh 'docker rmi $registry:latest'
+            }
+        }
 
         stage('Deploy') {
             steps {
